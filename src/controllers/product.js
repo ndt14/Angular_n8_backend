@@ -88,9 +88,11 @@ export const update = async (req, res) => {
       });
     }
 
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const product = await Product.findByIdAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    );
     if (!product) {
       return res.status(400).json({
         messenger: "Cập nhật sản phẩm thất bại",
