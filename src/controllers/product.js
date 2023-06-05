@@ -111,17 +111,14 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const product = Product.findOneAndDelete(req.params.id);
-    if (product) {
-      return res.status(200).json({
-        message: "Xoá sản phẩm thành công!",
-        datas: [],
-      });
-    }
+    const data = await Product.findByIdAndDelete({ _id: req.params.id });
+    return res.json({
+      message: "Xóa thành công",
+      data: data,
+    });
   } catch (error) {
-    return res.status(200).json({
-      message: "Loi server",
-      datas: [],
+    return res.status(401).json({
+      message: error.message,
     });
   }
 };
