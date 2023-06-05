@@ -12,7 +12,7 @@ app.use(cors()); // Di chuyển lệnh app.use(cors()) lên trên đoạn mã n�
 app.use(express.json());
 
 // mongoose.connect(`${process.env.API_DB}`);
-mongoose.connect('mongodb://localhost:27017/web17308')
+mongoose.connect('mongodb://127.0.0.1:27017/web17308')
     .then(() => {
         console.log(`Database connected successfully.`);
     })

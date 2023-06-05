@@ -6,7 +6,7 @@ dotenv.config();
 
 export const getAll = async (req, res) => {
   try {
-    const products = await Product.find().populate("categoryId");
+    const products = await Product.find();
     if (products.length === 0) {
       return res.status(204).json({
         message: "Danh sách sản phẩm trống!",
@@ -27,9 +27,7 @@ export const getAll = async (req, res) => {
 
 export const getDetail = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id).populate(
-      "categoryId"
-    );
+    const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(400).json({
         message: "Sản phẩm không tồn tại",
@@ -55,11 +53,11 @@ export const create = async (req, res) => {
       });
     }
     const product = await Product.create(req.body);
-    await Category.findByIdAndUpdate(product.categoryId, {
-      $addToSet: {
-        products: product._id,
-      },
-    });
+    // await Category.findByIdAndUpdate(product.categoryId, {
+    //   $addToSet: {
+    //     products: product._id,
+    //   },
+    // });
     // { $addToSet: { <field1>: <value1>, ... } }
 
     if (!product) {

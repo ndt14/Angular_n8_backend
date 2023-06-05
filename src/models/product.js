@@ -14,10 +14,10 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    categoryId: {
-      type: mongoose.Types.ObjectId,
-      ref: "Category",
-    },
+    // categoryId: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: "Category",
+    // },
   },
   {
     timestamps: true,
