@@ -22,7 +22,25 @@ dotenv.config();
  */
 
 const { SECRET_CODE } = process.env;
-
+export const getAll = async (req, res) => {
+  try {
+    const products = await User.find();
+    if (products.length === 0) {
+      return res.status(204).json({
+        message: "Danh sách sản phẩm trống!",
+        data: [],
+      });
+    }
+    return res.status(200).json({
+      message: "Lay danh sach user thanh cong",
+      data: [...products],
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: error,
+    });
+  }
+};
 export const signup = async (req, res) => {
   try {
     const { error } = signupSchema.validate(req.body);
