@@ -14,6 +14,18 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    quantity: {
+      type: Number,
+      require: true,
+    },
+    image: {
+      type: String,
+    },
+    brand: {
+      type: String,
+      require: true,
+      minLength: 3,
+    }
     // categoryId: {
     //   type: mongoose.Types.ObjectId,
     //   ref: "Category",
