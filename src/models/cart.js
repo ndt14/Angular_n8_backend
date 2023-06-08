@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
 const cartSchema = new mongoose.Schema(
-  { id: {
+  {
+    _id: {
         type: String,
-        require: true,
-        minLength:3, 	
     },
     name: {
       type: String,
@@ -20,7 +19,6 @@ const cartSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      require: true,
     },
     image: {
       type: String,

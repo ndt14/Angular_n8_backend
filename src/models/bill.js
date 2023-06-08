@@ -1,29 +1,39 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema(
+const billSchema = new mongoose.Schema(
   {
-    name: {
+    id: {
+      type: String,
+      minLength: 3,
+    },
+    nameUser: {
       type: String,
       require: true,
       minLength: 3,
+    },
+    nameProduct: {
+        type: String,
+        require: true,
+        minLength: 3,
+    },
+    email: {
+        type: String,
+        require: true
     },
     price: {
       type: Number,
       require: true,
     },
-    description: {
+    address: {
       type: String,
     },
     quantity: {
       type: Number,
-    },
-    image: {
-      type: String,
-    },
-    brand: {
-      type: String,
       require: true,
-      minLength: 3,
+    },
+    phone: {
+        type: Number,
+        require: true,
     }
     // categoryId: {
     //   type: mongoose.Types.ObjectId,
@@ -36,4 +46,4 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model("Bill", billSchema);

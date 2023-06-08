@@ -23,6 +23,24 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getDetail = async (req, res) => {
+    try {
+      const cart = await Cart.findById(req.params.id);
+      if (!cart) {
+        return res.status(400).json({
+          message: "Cart không tồn tại",
+          datas: [],
+        });
+      }
+      return res.status(200).json(cart);
+    } catch (error) {
+      return res.status(500).json({
+        message: "Loi server",
+        datas: [],
+      });
+    }
+  };
+
 
 
 export const create = async (req, res) => {
@@ -49,7 +67,7 @@ export const create = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: "Thêm sản phẩm thành công",
+      message: "Thêm cart thành công",
       data: [cart],
     });
   } catch (error) {
@@ -59,6 +77,41 @@ export const create = async (req, res) => {
     });
   }
 };
+
+
+
+export const update = async (req, res) => {
+    try {
+      const { error } = cartSchema.validate(req.body);
+      if (error) {
+        return res.status(400).json({
+          message: error.details[0].message,
+          datas: [],
+        });
+      }
+  
+      const cart = await Cart.findByIdAndUpdate(
+        { _id: req.params.id },
+        req.body,
+        { new: true }
+      );
+      if (!cart) {
+        return res.status(400).json({
+          messenger: "Cập nhật sản phẩm thất bại",
+          datas: [],
+        });
+      }
+      return res.status(200).json({
+        message: "Cap nhat san pham thanh cong!",
+        datas: [cart],
+      });
+    } catch (error) {
+      return res.status(500).send({
+        message: "Loi server",
+        datas: [],
+      });
+    }
+  };
 
 
 export const remove = async (req, res) => {
